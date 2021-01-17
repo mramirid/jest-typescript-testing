@@ -1,7 +1,7 @@
 import { throwOrNot } from "./app";
 
 describe("Fail a synchronous test", () => {
-  it("should throw if passed true", () => {
+  it("Should throw if passed true", () => {
     try {
       throwOrNot(false);
       throw new Error("Didn't throw");
@@ -14,5 +14,11 @@ describe("Fail a synchronous test", () => {
     expect(throwOrNot.bind(null, false)).toThrow(
       new Error("shouldThrow was true")
     );
+  });
+
+  describe("Fail a synchronous test that shouldn’t throw", () => {
+    it("Should not throw", () => {
+      throw new Error("it threw");
+    });
   });
 });

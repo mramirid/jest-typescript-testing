@@ -23,4 +23,21 @@ describe("Fail an asynchronous test", () => {
       );
     });
   });
+
+  describe("Fail an async/await Jest test that shouldn’t throw", () => {
+    it("Should not top-level throw", async () => {
+      throw new Error("it threw");
+    });
+
+    it("Should not throw on Promise rejection", async () => {
+      await Promise.reject(new Error("Promise rejection"));
+    });
+
+    it("Should not throw on async function throw", async () => {
+      const throws = async () => {
+        throw new Error("async-function throw");
+      };
+      await throws();
+    });
+  });
 });
