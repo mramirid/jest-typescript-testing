@@ -2,13 +2,15 @@ import db from "./db";
 import lib from "./lib";
 import { Todo } from "./types";
 
-jest.mock("./db");
-const mockedDB = db as jest.Mocked<typeof db>;
+describe("Mock/Spy setup internal functions", () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
 
-describe("Mocking the dependency module", () => {
   test("addTodo > inserts with new id", async () => {
+    const dbSetSpy = jest.spyOn(db, "set").mockImplementation(async () => {});
     await lib.addTodo({ name: "New Todo" });
-    expect(mockedDB.set).toHaveBeenCalledWith("todos/1", {
+    expect(dbSetSpy).toHaveBeenCalledWith("todos/1", {
       id: 1,
       name: "New Todo",
     });
@@ -17,13 +19,13 @@ describe("Mocking the dependency module", () => {
   test("getTodo > returns output of db.get", async () => {
     const expected: Todo = {
       id: 1,
-      name: "New Todo",
+      name: "todo-1",
     };
-    mockedDB.get.mockResolvedValueOnce(expected);
+    const dbGetSpy = jest.spyOn(db, "get").mockResolvedValueOnce(expected);
 
     const result = await lib.getTodo(1);
 
-    expect(mockedDB.get).toHaveBeenCalledWith("todos/1");
+    expect(dbGetSpy).toHaveBeenCalledWith("todos/1");
     expect(result).toEqual(expected);
   });
 });

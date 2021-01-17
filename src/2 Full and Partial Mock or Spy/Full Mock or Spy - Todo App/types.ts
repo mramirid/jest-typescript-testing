@@ -8,5 +8,5 @@ export interface Todo extends InputTodo {
 
 export interface SavedTodos {
   key?: Todo;
-  [key: string]: Todo;
+  [key: string]: Todo | undefined;
 }
