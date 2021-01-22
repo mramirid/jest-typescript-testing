@@ -28,4 +28,11 @@ describe("Array/Object partial match with objectContaining and arrayContaining",
       );
     });
   });
+
+  describe("Simple Array partial matching", () => {
+    it("Should contain the desired values", () => {
+      const oddArray = [1, 3, 5, 7, 9, 11, 13];
+      expect(oddArray).toEqual(expect.arrayContaining([1, 3, 5, 7, 9]));
+    });
+  });
 });
