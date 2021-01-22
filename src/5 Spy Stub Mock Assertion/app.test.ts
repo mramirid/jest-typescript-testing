@@ -50,4 +50,35 @@ describe("Spy Stub Mock Assertion", () => {
       expect(somethingSpy).not.toBeCalled();
     });
   });
+
+  describe("Asserting on a stub/spy call count", () => {
+    const counter = {
+      count: 0,
+      increment() {
+        this.count++;
+      },
+      getCount() {
+        return this.count;
+      },
+    };
+    const doIncrement = (ctr: typeof counter) => {
+      ctr.increment();
+    };
+
+    test("doIncrement() with mocked counter .toBeCalledTimes(1)", () => {
+      const mockedCounter = {
+        ...counter,
+        increment: jest.fn(),
+      };
+      doIncrement(mockedCounter);
+      expect(mockedCounter.increment).toBeCalledTimes(1);
+    });
+
+    test("doIncrement() with jest.spyOn(counter) .toBeCalledTimes(1)", () => {
+      const incrementSpy = jest.spyOn(counter, "increment");
+      doIncrement(counter);
+      expect(incrementSpy).toBeCalledTimes(1);
+      expect(counter.getCount()).toEqual(1);
+    });
+  });
 });
