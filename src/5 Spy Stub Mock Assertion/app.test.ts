@@ -38,4 +38,16 @@ describe("Spy Stub Mock Assertion", () => {
       expect(somethingSpy).toBeCalled();
     });
   });
+
+  describe("Asserting a stub/spy has not been called", () => {
+    test("jest.fn().not.toBeCalled()", () => {
+      const stub = jest.fn();
+      expect(stub).not.toBeCalled();
+    });
+
+    test("jest.spyOn().not.toBeCalled()", () => {
+      const somethingSpy = jest.spyOn(myObj, "doSomething").mockReturnValue();
+      expect(somethingSpy).not.toBeCalled();
+    });
+  });
 });
