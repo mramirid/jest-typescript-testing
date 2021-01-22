@@ -50,4 +50,19 @@ describe("Array/Object partial match with objectContaining and arrayContaining",
       );
     });
   });
+
+  describe("Object with nested arrays partial matching", () => {
+    test("User with id 3 should be a friend of this user", () => {
+      const user = {
+        id: 1,
+        name: "Hugo",
+        friends: [3, 5, 22],
+      };
+      expect(user).toEqual(
+        expect.objectContaining({
+          friends: expect.arrayContaining([3]),
+        })
+      );
+    });
+  });
 });
