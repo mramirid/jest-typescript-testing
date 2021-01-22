@@ -81,4 +81,37 @@ describe("Spy Stub Mock Assertion", () => {
       expect(counter.getCount()).toEqual(1);
     });
   });
+
+  describe("Asserting on parameter/arguments for call(s)", () => {
+    const counter = {
+      count: 0,
+      add(val: number) {
+        this.count += val;
+      },
+      getCount() {
+        return this.count;
+      },
+    };
+    const doMultipleAdd = (ctr: typeof counter) => {
+      ctr.add(10);
+      ctr.add(20);
+    };
+
+    test("doMultipleAdd > jest.fn() toBeCalledWith()", () => {
+      const mockCounter = {
+        ...counter,
+        add: jest.fn(),
+      };
+      doMultipleAdd(mockCounter);
+      expect(mockCounter.add).toBeCalledWith(10);
+      expect(mockCounter.add).toBeCalledWith(20);
+    });
+
+    test("doMultipleAdd > jest.spyOn() toBeCalledWith()", () => {
+      const addSpy = jest.spyOn(counter, "add");
+      doMultipleAdd(counter);
+      expect(addSpy).toBeCalledWith(10);
+      expect(addSpy).toBeCalledWith(20);
+    });
+  });
 });
