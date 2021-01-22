@@ -65,4 +65,24 @@ describe("Array/Object partial match with objectContaining and arrayContaining",
       );
     });
   });
+
+  describe("Check that something is not in an array or object", () => {
+    const user = {
+      id: 1,
+      name: "Hugo",
+      friends: [3, 5, 22],
+    };
+
+    test("This user doesn't have github profile", () => {
+      expect(user).toEqual(
+        expect.not.objectContaining({
+          githubURL: "https://github.com/mramirid/",
+        })
+      );
+    });
+
+    test("This user doesn't have friend with id 10", () => {
+      expect(user.friends).toEqual(expect.not.arrayContaining([10]));
+    });
+  });
 });
