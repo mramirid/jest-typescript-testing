@@ -22,4 +22,20 @@ describe("Spy Stub Mock Assertion", () => {
       expect(somethingSpy).toBeCalled();
     });
   });
+
+  describe("Replace a spied-on function’s implementation", () => {
+    test("spyOn().mockImplementation()", () => {
+      const somethingSpy = jest
+        .spyOn(myObj, "doSomething")
+        .mockImplementation();
+      myObj.doSomething();
+      expect(somethingSpy).toBeCalled();
+    });
+
+    test("spyOn().mockReturnValue()", () => {
+      const somethingSpy = jest.spyOn(myObj, "doSomething").mockReturnValue();
+      myObj.doSomething();
+      expect(somethingSpy).toBeCalled();
+    });
+  });
 });
