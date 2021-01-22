@@ -35,4 +35,19 @@ describe("Array/Object partial match with objectContaining and arrayContaining",
       expect(oddArray).toEqual(expect.arrayContaining([1, 3, 5, 7, 9]));
     });
   });
+
+  describe("Array of objects partial matching", () => {
+    it("Should have ids 1 and 2", () => {
+      const users = [
+        { id: 1, name: "Hugo" },
+        { id: 2, name: "Francesco" },
+      ];
+      expect(users).toEqual(
+        expect.arrayContaining([
+          expect.objectContaining({ id: 1 }),
+          expect.objectContaining({ id: 2 }),
+        ])
+      );
+    });
+  });
 });
