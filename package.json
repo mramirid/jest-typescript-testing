@@ -1,12 +1,12 @@
 {
-  "name": "jest-fn-spyon-stub-mock",
+  "name": "typescript-testing",
   "version": "1.0.0",
-  "description": "Learn Jest .fn() and .spyOn() spy/stub/mock assertion",
-  "main": "app.js",
+  "description": "Typescript testing using Jest",
   "scripts": {
     "test": "jest --watchAll"
   },
   "keywords": [
+    "typescript",
     "testing",
     "jest"
   ],
@@ -21,6 +21,5 @@
     "jest": "^26.6.3",
     "ts-jest": "^26.4.4",
     "typescript": "^4.1.3"
-  },
-  "dependencies": {}
+  }
 }
